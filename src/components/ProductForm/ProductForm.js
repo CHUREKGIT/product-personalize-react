@@ -1,13 +1,17 @@
 import styles from './ProductForm.module.scss';
+import {useMemo} from 'react'
 import Button from '../Button/Button';
 import OptionSize from '../OptionSize/OptionSize';
 import OptionColor from '../OptionColor/OptionColor';
 
 const ProductForm = props => {
 
-    const getPrice = (basePrice, sizePrice) => {
+    const getPrice = useMemo( () => {
+      return ((basePrice, sizePrice) => {
         return basePrice + sizePrice
-      }
+      });
+    }, [props.sizes]);
+
     const summaryCart = (name, price, size, color) => {
         console.log('SUMMARY');
         console.log('=======');
